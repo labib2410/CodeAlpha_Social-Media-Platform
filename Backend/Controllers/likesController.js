@@ -1,20 +1,4 @@
 const { getConnection } = require('../Config/db');
-const jwt = require('jsonwebtoken');
-
-// Middleware-like function to extract user ID from token
-function getUserIdFromToken(req) {
-    const authHeader = req.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) return null;
-
-    const token = authHeader.split(' ')[1];
-    try {
-        const decoded = jwt.verify(token, 'your_jwt_secret'); // استبدلها بنفس secret المستخدم في تسجيل الدخول
-        return decoded.userId;
-    } catch (error) {
-        return null;
-    }
-}
 
 const addLike = async (req, res) => {
     try {
@@ -58,7 +42,7 @@ const addLike = async (req, res) => {
 const unlike = async (req, res) => {
     try {
         const db = getConnection();
-        const { user_id, post_id } = req.body; // Get user_id from request body
+        const { user_id, post_id } = req.body;
 
         if (!user_id || !post_id) {
             return res.status(400).json({

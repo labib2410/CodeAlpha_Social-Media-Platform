@@ -12,7 +12,6 @@ const followUser = async (req, res) => {
             });
         }
 
-        // تحقق إذا كان الفولور موجود بالفعل
         const checkQuery = `SELECT id FROM followers WHERE follower_id = ? AND following_id = ?`;
         const [existing] = await db.execute(checkQuery, [follower_id, following_id]);
 
@@ -55,7 +54,6 @@ const unfollowUser = async (req, res) => {
             });
         }
 
-        // تحقق إذا كان الفولور موجود
         const checkQuery = `SELECT id FROM followers WHERE follower_id = ? AND following_id = ?`;
         const [existing] = await db.execute(checkQuery, [follower_id, following_id]);
 

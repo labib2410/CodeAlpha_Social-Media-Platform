@@ -1,6 +1,5 @@
 const { getConnection } = require('../Config/db');
 
-// ✅ إنشاء بوست جديد
 const createPost = async (req, res) => {
     try {
         const { content,user_id } = req.body;
@@ -32,7 +31,6 @@ const createPost = async (req, res) => {
 };
 
 
-// ✅ جلب كل البوستات (مع هل المستخدم عامل لايك أو فولو)
 const getPosts = async (req, res) => {
     try {
         const db = getConnection(); // ✅ أضف هذا السطر
@@ -91,7 +89,6 @@ const getPosts = async (req, res) => {
     }
 };
 
-// ✅ جلب بوستات المستخدم الحالي
 const getMyPosts = async (req, res) => {
     try {
         const user_id = req.user?.id;
@@ -133,7 +130,6 @@ const getMyPosts = async (req, res) => {
     }
 };
 
-// ✅ جلب بوستات مستخدم معين
 const getPostsByUserId = async (req, res) => {
     try {
         const user_id = req.params.userId;

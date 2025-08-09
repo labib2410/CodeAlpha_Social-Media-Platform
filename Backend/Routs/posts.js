@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const upload = require('../middleware/upload'); // المسار حسب مكان الملف
+const upload = require('../middleware/upload'); // استدعاء الميدل وير
 
 const {
     createPost,

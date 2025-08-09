@@ -1,6 +1,5 @@
 const { getConnection } = require('../Config/db');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 
 const register = async (req, res) => {
     try {
@@ -41,15 +40,7 @@ const register = async (req, res) => {
             'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
             [username, email.toLowerCase(), hashedPassword]
         );
-        const token = jwt.sign(
-            {
-                userId: result.insertId,
-                email: email.toLowerCase()
-            },
-            process.env.JWT_SECRET,
-            { expiresIn: '24h' }
-        );
-
+        
         res.status(201).json({
             success: true,
             message: 'User registered successfully',
@@ -58,8 +49,7 @@ const register = async (req, res) => {
                     id: result.insertId,
                     username,
                     email: email.toLowerCase()
-                },
-                token
+                }
             }
         });
     } catch (error) {
@@ -107,15 +97,7 @@ const login = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
-            {
-                userId: user.id,
-                email: user.email
-            },
-            process.env.JWT_SECRET || 'defaultsecret',
-            { expiresIn: '24h' }
-        );
-
+       
         const userResponse = {
             id: user.id,
             username: user.username,
@@ -126,9 +108,7 @@ const login = async (req, res) => {
             success: true,
             message: 'Login successful',
             data: {
-                user: userResponse,
-                token
-            }
+                user: userResponse }
         });
 
     } catch (error) {

@@ -34,7 +34,7 @@ export default function Login() {
                 localStorage.setItem('userId', data.data.user.id);
                 localStorage.setItem('userEmail', data.data.user.email);
                 setErrorMsg('');
-                setUserToken(data.data.token);
+                setUserToken(data.data.user.id);
                 navigate('/');
             }
         } catch (error) {
